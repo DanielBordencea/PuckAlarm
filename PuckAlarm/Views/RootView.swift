@@ -42,8 +42,19 @@ struct RootView: View {
             }
             .onChange(of: router.scanRequestToken) { _, _ in
                 enforcer.reconcile()
+                enforcer.presentGateNow()
                 syncGate()
                 router.clearScanRequest()
+            }
+            .onOpenURL { url in
+                // How the Live Activity gets here: a widget cannot foreground the app by
+                // running an intent, so the "Scan Puck" button is a Link to this URL.
+                guard let alarmID = DeepLink.scanAlarmID(from: url) else {
+                    AppLog.routing.notice("ignored unknown URL \(url.absoluteString, privacy: .public)")
+                    return
+                }
+                AppLog.routing.notice("scan link opened for \(alarmID.uuidString, privacy: .public)")
+                router.requestScan(for: alarmID)
             }
             .task {
                 enforcer.startObserving()
@@ -54,6 +65,8 @@ struct RootView: View {
 
     private func syncGate() {
         let visible = enforcer.isGateVisible
-        if isGateUp != visible { isGateUp = visible }
+        guard isGateUp != visible else { return }
+        AppLog.routing.notice("gate \(visible ? "shown" : "hidden", privacy: .public)")
+        isGateUp = visible
     }
 }

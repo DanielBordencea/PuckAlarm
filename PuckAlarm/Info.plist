@@ -42,6 +42,25 @@
 	<key>NSSupportsLiveActivitiesFrequentUpdates</key>
 	<true/>
 
+	<!--
+	  The Live Activity opens the app through this scheme. A widget cannot bring the app
+	  forward by running an AppIntent — Button(intent:) performs in the background by
+	  design — and Core NFC needs a foreground app before it will open a reader session.
+	-->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.bordencea.PuckAlarm.deeplink</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>puckalarm</string>
+			</array>
+		</dict>
+	</array>
+
 	<!-- Shown in the AlarmKit permission prompt. -->
 	<key>NSAlarmKitUsageDescription</key>
 	<string>PuckAlarm needs permission to schedule alarms so it can wake you and keep the alarm coming back until you scan your puck.</string>

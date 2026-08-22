@@ -39,6 +39,16 @@
 			isa = PBXBuildFile;
 			fileRef = E078F1BF404BEFF81FCA8011 /* WakeEnforcer.swift */;
 		};
+		5E35FE194C7FD8A18E86F604 /* AppLog.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = AppLog.swift;
+			sourceTree = "<group>";
+		};
+		6B70B4F4A98CBF7B9106E888 /* AppLog.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 5E35FE194C7FD8A18E86F604 /* AppLog.swift */;
+		};
 		B267F3CEC2C8B8E8B183FBA9 /* Theme.swift */ = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.swift;
@@ -187,6 +197,10 @@
 			isa = PBXBuildFile;
 			fileRef = E078F1BF404BEFF81FCA8011 /* WakeEnforcer.swift */;
 		};
+		3E246A4871AFEE6B471023D4 /* AppLog.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = 5E35FE194C7FD8A18E86F604 /* AppLog.swift */;
+		};
 		80FE4EDBC1F459A30B8E43C3 /* Theme.swift in PuckAlarmWidgetExtension */ = {
 			isa = PBXBuildFile;
 			fileRef = B267F3CEC2C8B8E8B183FBA9 /* Theme.swift */;
@@ -280,6 +294,7 @@
 		8F93D9B3C8ED7984ED06F9AD /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				5E35FE194C7FD8A18E86F604 /* AppLog.swift */,
 				B267F3CEC2C8B8E8B183FBA9 /* Theme.swift */,
 			);
 			path = Design;
@@ -398,6 +413,7 @@
 			files = (
 				C56AF3582B0B64D171C1292E,
 				07BE65AE406FF238DF62DBEC,
+				6B70B4F4A98CBF7B9106E888,
 				049DBD7D02EF2FE39CB20EE7,
 				C9B90F443474A4228B1013B8,
 				61C454D7075E4E59609B1F72,
@@ -447,6 +463,7 @@
 			files = (
 				8BD5C8BA33C13B92D748E516,
 				42757BC90A260EE80434556D,
+				3E246A4871AFEE6B471023D4,
 				80FE4EDBC1F459A30B8E43C3,
 				426708A5A4781664239CBFCA,
 				A0EECDBAF8924C0BBF625767,

@@ -106,6 +106,24 @@ final class WakeEnforcer {
         )
     }
 
+    /// Ends any active deferral so the scan screen comes up immediately.
+    ///
+    /// Tapping "Scan Puck" during the quiet minute after a bypass is the user asking to
+    /// finish early. Making them wait for the alarm to ring again would be perverse — the
+    /// point is to get them scanning, not to punish them for volunteering.
+    func presentGateNow() {
+        guard store.activeGuard != nil else {
+            AppLog.enforcement.notice("presentGateNow ignored: no active guard")
+            return
+        }
+        guard store.activeGuard?.deferredUntil != nil else {
+            AppLog.enforcement.notice("presentGateNow: gate already visible")
+            return
+        }
+        AppLog.enforcement.notice("presentGateNow: ending deferral early")
+        store.updateGuard { $0.deferredUntil = nil }
+    }
+
     // MARK: - Bypass
 
     /// Invoked by `StopWithoutScanIntent` when the user presses the system Stop button.
@@ -165,6 +183,9 @@ final class WakeEnforcer {
                 $0.deferredUntil = Date().addingTimeInterval(interval)
             }
             enforcementWarning = nil
+            AppLog.enforcement.notice(
+                "bypass #\(wakeGuard.bypassCount, privacy: .public): retry armed in \(interval, privacy: .public)s"
+            )
         } catch {
             // The guard stays open and visible: if the retry could not be armed, hiding the
             // screen would leave nothing at all holding the user to the scan.
@@ -185,6 +206,9 @@ final class WakeEnforcer {
         guard let wakeGuard = store.activeGuard else { return }
         suppressStopHandlingUntil = Date().addingTimeInterval(5)
         enforcementWarning = nil
+        AppLog.enforcement.notice(
+            "resolved by scan after \(wakeGuard.bypassCount, privacy: .public) bypasses"
+        )
         AlarmScheduler.stopEverything(for: wakeGuard)
         store.resolveGuard(scanned: true)
         retireIfOneShot(wakeGuard.originAlarmID)

@@ -37,7 +37,7 @@ Worth being precise about, because it decides what the app can and cannot look l
 |---|---|
 | "Ready to Scan" sheet with the checkmark | **iOS.** Core NFC shows it whenever an `NFCTagReaderSession` is open. The app only sets the line underneath — `"Alarm Stopped"`. |
 | Full-screen alarm alert when it fires | **iOS.** AlarmKit renders it from `AlarmPresentation.Alert`. The title, tint and the secondary button ("Scan Puck") are configurable; the layout is not. |
-| Lock Screen / Dynamic Island banner | **This app.** `PuckAlarmLiveActivity` — plain SwiftUI. |
+| Lock Screen / Dynamic Island banner | **This app.** `PuckAlarmLiveActivity` — plain SwiftUI. Its "Scan Puck" button is a `Link`, not a `Button(intent:)`: a widget runs intents in the background by design, so an intent there does nothing visible. Only a URL brings the app forward. |
 | The wake-up screen with the big clock and "Scan Puck" | **This app.** `ScanGateView`, shown full-screen and non-dismissible while a guard is open. |
 
 ---
@@ -179,6 +179,34 @@ changed in Xcode's project editor, signing included, is discarded on the next re
 `typecheck.sh` reads its file lists straight out of the generator, so it cannot drift out
 of sync with what actually gets compiled. An earlier version kept its own copy of the list
 and reported "clean" while a newly added file was not being checked at all.
+
+## Why scanning cannot happen in the widget
+
+The obvious design — tap "Scan Puck" on the Lock Screen, hold the phone to the tag, never
+open the app — is not possible on iOS. `NFCTagReaderSession` presents a system sheet over
+the app that started it, and an extension has no foreground context to present from. Core
+NFC is a foreground-app API, full stop.
+
+So the Live Activity's job is to *get you into the app*, and the app does the scanning. The
+button is a `Link` to `puckalarm://scan?alarm=<uuid>`; `RootView.onOpenURL` turns that into
+a scan request, which ends any active deferral and raises the wake screen immediately —
+tapping "Scan Puck" during the quiet minute after a bypass should let you finish early, not
+make you wait for the next ring.
+
+## Logging
+
+The enforcement loop runs at 6am, in the background, with no debugger attached. It writes
+to the unified log under one subsystem:
+
+```bash
+log show --last 30m --predicate 'subsystem == "com.bordencea.PuckAlarm"'
+# or, on a simulator:
+xcrun simctl spawn booted log show --last 30m \
+  --predicate 'subsystem == "com.bordencea.PuckAlarm"' --style compact
+```
+
+Categories: `enforcement` (guards, bypasses, deferrals, resolutions), `scheduling`,
+`routing` (deep links, gate visibility).
 
 ## Known limitations
 

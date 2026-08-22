@@ -44,10 +44,17 @@ struct PuckAlarmLiveActivity: Widget {
         }
     }
 
+    /// `Link`, not `Button(intent:)`.
+    ///
+    /// A widget runs `Button(intent:)` in the background on purpose — interactive widgets
+    /// are meant to act without launching anything — so an intent here would tick over
+    /// silently and the user would see nothing happen. Only a URL brings the app forward,
+    /// and the app has to be in the foreground before Core NFC will open a reader session
+    /// at all.
     @ViewBuilder
     private func scanButton(for metadata: PuckAlarmMetadata?) -> some View {
         if let metadata {
-            Button(intent: OpenScanIntent(alarmID: metadata.originAlarmID.uuidString)) {
+            Link(destination: DeepLink.scan(alarmID: metadata.originAlarmID)) {
                 Text("Scan Puck")
                     .font(Theme.button)
                     .foregroundStyle(Color.black)
@@ -55,7 +62,6 @@ struct PuckAlarmLiveActivity: Widget {
                     .frame(height: 40)
                     .background(Color.white, in: Capsule())
             }
-            .buttonStyle(.plain)
         }
     }
 }
@@ -96,7 +102,7 @@ private struct LockScreenView: View {
                 .foregroundStyle(Theme.tertiaryText)
 
             if case .alert = state.mode, let metadata {
-                Button(intent: OpenScanIntent(alarmID: metadata.originAlarmID.uuidString)) {
+                Link(destination: DeepLink.scan(alarmID: metadata.originAlarmID)) {
                     Text("Scan Puck")
                         .font(Theme.button)
                         .foregroundStyle(Color.black)
@@ -104,11 +110,12 @@ private struct LockScreenView: View {
                         .frame(height: 44)
                         .background(Color.white, in: Capsule())
                 }
-                .buttonStyle(.plain)
                 .padding(.top, 2)
             }
         }
         .padding(16)
+        // Tapping anywhere on the banner, not just the button, opens the scan screen.
+        .widgetURL(metadata.map { DeepLink.scan(alarmID: $0.originAlarmID) })
     }
 
     /// While alerting, AlarmKit reports the scheduled time in the state; fall back to the

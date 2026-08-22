@@ -43,6 +43,7 @@ SHARED_SOURCES = [
     "PuckAlarm/Intents/AlarmIntents.swift",
     "PuckAlarm/Intents/AppRouter.swift",
     "PuckAlarm/Design/Theme.swift",
+    "PuckAlarm/Design/AppLog.swift",
 ]
 
 APP_ONLY_SOURCES = [
