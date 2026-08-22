@@ -53,16 +53,20 @@ struct ScanGateView: View {
         .interactiveDismissDisabled()
         .onAppear { pulse = true }
         .confirmationDialog(
-            "Dismiss without scanning?",
+            "The alarm will come back",
             isPresented: $showEscapeConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Dismiss anyway", role: .destructive) {
-                enforcer.resolveWithoutScan()
+            Button("Silence for a minute", role: .destructive) {
+                Task { await enforcer.deferWithoutScan() }
             }
             Button("Keep trying", role: .cancel) {}
         } message: {
-            Text("This is logged as a bypass and the alarm will not come back.")
+            Text(
+                "This only buys you \(Int(AlarmScheduler.retryInterval)) seconds. "
+                + "The alarm rings again after that, and keeps ringing. "
+                + "Scanning the puck is the only thing that ends it."
+            )
         }
     }
 
@@ -199,6 +203,7 @@ struct ScanGateView: View {
             }
             .font(Theme.caption)
             .foregroundStyle(Theme.tertiaryText)
+            .accessibilityHint("Silences the alarm for one minute. It will ring again.")
         }
     }
 

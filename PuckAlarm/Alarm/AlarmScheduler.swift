@@ -87,11 +87,17 @@ enum AlarmScheduler {
     /// Stops whichever alarm is currently alerting, plus any pending retry. Used when the
     /// puck scan succeeds and the wake-up is genuinely over.
     static func stopEverything(for wakeGuard: WakeGuard) {
-        for alarm in alarms where alarm.state == .alerting {
-            try? AlarmManager.shared.stop(id: alarm.id)
-        }
+        stopAlerting()
         if let followUpID = wakeGuard.pendingFollowUpID {
             cancel(id: followUpID)
+        }
+    }
+
+    /// Silences whatever is ringing without touching the pending retry. Used when the user
+    /// bypasses from inside the app: the noise should stop, the enforcement should not.
+    static func stopAlerting() {
+        for alarm in alarms where alarm.state == .alerting {
+            try? AlarmManager.shared.stop(id: alarm.id)
         }
     }
 

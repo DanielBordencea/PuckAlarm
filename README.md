@@ -17,7 +17,7 @@ Honest summary of what has actually been verified, as of 2026-08-23.
 |---|---|
 | ✅ Builds | Both targets, **Swift 6 language mode**, zero warnings |
 | ✅ Runs | iOS 26.5 Simulator — alarms fire, the re-arm loop works, history records wake-ups |
-| ✅ Verified | Alarm scheduling, bypass → 60s retry, scan resolution, one-shot retirement, Keychain migration, corrupt-store recovery |
+| ✅ Verified | Alarm scheduling, bypass → 60s retry, scan resolution, one-shot retirement, corrupt-store recovery, and the gate presenting on a cold launch with a wake-up already in progress |
 | ⚠️ Not verified | **Never run on physical hardware.** Needs an Apple ID in Xcode for a signing identity. |
 | ⚠️ Not verified | **Real NFC has never been exercised.** Requires a paid developer account (see below); all scans so far used the simulated path. |
 | ❌ Missing | **No tests.** The `WakeEnforcer` state machine is the thing that most needs them. |
@@ -57,8 +57,15 @@ exists that would. So "you must scan" is enforced *after* the button rather than
 5. A matching tag calls `WakeEnforcer.resolveByScan`, which stops the alerting alarm,
    cancels the pending retry, and closes the guard.
 
-There is a deliberate escape hatch — *"I can't find my puck"* — because a broken tag should
-not brick someone's phone. It is recorded in the history as a bypass rather than a wake-up.
+**There is no escape hatch.** *"I can't find my puck"* silences the current ring and hides
+the screen so the phone is usable, and that is all it does: it counts as a bypass, arms the
+same 60-second retry, and the alarm comes back. Pressing the system Stop button does
+exactly the same thing. Scanning the paired tag is the only action that closes a wake-up.
+
+Be deliberate about this before you rely on it. If the tag is genuinely lost or broken, the
+alarm will keep firing every minute indefinitely, and the only way out is deleting the app.
+That is the intended behaviour of a commitment device, not an oversight — but it is worth
+knowing before you put the tag somewhere you might not be able to reach.
 
 If the retry itself cannot be armed, the app says so on the wake screen instead of failing
 quietly. The user is awake at that moment and can set a backup alarm; ten minutes later

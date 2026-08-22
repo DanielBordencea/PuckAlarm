@@ -278,6 +278,20 @@ struct WakeGuard: Codable, Hashable, Sendable {
     /// can be cancelled the moment the puck is scanned.
     var pendingFollowUpID: UUID?
 
+    /// While set and in the future, the scan screen stays hidden so the phone is usable —
+    /// but the wake-up is *not* over. The retry is already armed and the guard is still
+    /// open, so the alarm comes back and the screen returns with it.
+    ///
+    /// Optional and therefore backward-compatible with guards persisted before this
+    /// existed: the synthesized decoder treats a missing key as `nil`.
+    var deferredUntil: Date?
+
+    /// True when the scan screen should be on screen right now.
+    var isGateVisible: Bool {
+        guard let deferredUntil else { return true }
+        return Date() >= deferredUntil
+    }
+
     var metadata: PuckAlarmMetadata {
         PuckAlarmMetadata(
             originAlarmID: originAlarmID,

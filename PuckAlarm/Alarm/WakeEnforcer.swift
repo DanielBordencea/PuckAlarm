@@ -36,10 +36,13 @@ final class WakeEnforcer {
         self.store = store
     }
 
-    /// True while a wake-up is unresolved. The UI uses this to present the scan screen and
-    /// refuse to be dismissed.
-    var isGuardActive: Bool {
-        store.activeGuard != nil
+    /// Whether the scan screen should be on screen.
+    ///
+    /// Note this is *not* the same as "the wake-up is over". A bypass hides the screen for
+    /// a minute so the phone is usable, but `store.activeGuard` stays set the whole time —
+    /// the alarm is coming back.
+    var isGateVisible: Bool {
+        store.activeGuard?.isGateVisible ?? false
     }
 
     var activeGuard: WakeGuard? {
@@ -69,9 +72,19 @@ final class WakeEnforcer {
     /// alarm that is currently alerting and is configured to require a scan.
     func reconcile(with alarms: [Alarm]? = nil) {
         let alarms = alarms ?? AlarmScheduler.alarms
-        guard store.activeGuard == nil else { return }
-
         let alerting = alarms.filter { $0.state == .alerting }
+
+        // An open guard plus something ringing means the retry has landed: end the
+        // deferral so the scan screen comes back with the noise. This is the event that
+        // makes "the alarm returns every minute" visible in the UI, rather than relying
+        // on a timer.
+        if store.activeGuard != nil {
+            if !alerting.isEmpty, store.activeGuard?.deferredUntil != nil {
+                store.updateGuard { $0.deferredUntil = nil }
+            }
+            return
+        }
+
         guard !alerting.isEmpty else { return }
 
         // Prefer an alerting alarm we recognise; a retry alarm has an id the store does
@@ -115,6 +128,21 @@ final class WakeEnforcer {
             )
         }
 
+        await bypass()
+    }
+
+    /// "I can't find my puck". Silences the current ring and lets go of the screen so the
+    /// phone is usable — and that is all it does. The wake-up stays open, the retry is
+    /// armed, and the alarm comes back in a minute. It keeps coming back until the puck is
+    /// scanned; there is no other way out by design.
+    func deferWithoutScan() async {
+        AlarmScheduler.stopAlerting()
+        await bypass()
+    }
+
+    /// One bypass: count it, replace any retry already in flight, and hide the screen until
+    /// the alarm rings again.
+    private func bypass() async {
         guard var wakeGuard = store.activeGuard else { return }
 
         // A retry may already be in flight if the user hammered Stop; replace it rather
@@ -128,13 +156,18 @@ final class WakeEnforcer {
 
         do {
             let followUpID = try await AlarmScheduler.scheduleFollowUp(for: wakeGuard)
-            store.updateGuard { $0.pendingFollowUpID = followUpID }
+            store.updateGuard {
+                $0.pendingFollowUpID = followUpID
+                $0.deferredUntil = Date().addingTimeInterval(AlarmScheduler.retryInterval)
+            }
             enforcementWarning = nil
         } catch {
-            // The guard stays open, so the in-app scan screen still blocks and the next
-            // scheduled occurrence still fires — but the one-minute retry is gone, which
-            // is the part the user is relying on. Say so instead of failing quietly.
-            store.updateGuard { $0.pendingFollowUpID = nil }
+            // The guard stays open and visible: if the retry could not be armed, hiding the
+            // screen would leave nothing at all holding the user to the scan.
+            store.updateGuard {
+                $0.pendingFollowUpID = nil
+                $0.deferredUntil = nil
+            }
             enforcementWarning =
                 "The alarm couldn't be re-armed: \(AlarmScheduler.describe(error)) "
                 + "It will not come back on its own."
@@ -143,22 +176,13 @@ final class WakeEnforcer {
 
     // MARK: - Resolution
 
-    /// The only clean way out: the paired puck was scanned.
+    /// The only way out: the paired puck was scanned.
     func resolveByScan() {
-        resolve(scanned: true)
-    }
-
-    /// Escape hatch for a lost or broken puck. Recorded as a bypass, not as a wake-up.
-    func resolveWithoutScan() {
-        resolve(scanned: false)
-    }
-
-    private func resolve(scanned: Bool) {
         guard let wakeGuard = store.activeGuard else { return }
         suppressStopHandlingUntil = Date().addingTimeInterval(5)
         enforcementWarning = nil
         AlarmScheduler.stopEverything(for: wakeGuard)
-        store.resolveGuard(scanned: scanned)
+        store.resolveGuard(scanned: true)
         retireIfOneShot(wakeGuard.originAlarmID)
     }
 
