@@ -59,7 +59,8 @@ exists that would. So "you must scan" is enforced *after* the button rather than
 
 **There is no escape hatch.** *"I can't find my puck"* silences the current ring and hides
 the screen so the phone is usable, and that is all it does: it counts as a bypass, arms the
-same 60-second retry, and the alarm comes back. Pressing the system Stop button does
+same retry (30 seconds to 10 minutes, set in Settings ▸ Enforcement), and the alarm comes
+back. Pressing the system Stop button does
 exactly the same thing. Scanning the paired tag is the only action that closes a wake-up.
 
 Be deliberate about this before you rely on it. If the tag is genuinely lost or broken, the
@@ -184,7 +185,6 @@ and reported "clean" while a newly added file was not being checked at all.
   matters if two alarms ring at once.
 - `AlarmEditorView` reads the store singleton in `init` to decide whether the alarm is new,
   because `@Environment` is not available there yet.
-- The 60-second retry interval is not user-configurable.
 
 ## Licence
 

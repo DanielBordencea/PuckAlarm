@@ -155,10 +155,14 @@ final class WakeEnforcer {
         store.updateGuard { $0.bypassCount = wakeGuard.bypassCount }
 
         do {
-            let followUpID = try await AlarmScheduler.scheduleFollowUp(for: wakeGuard)
+            let interval = store.retryInterval
+            let followUpID = try await AlarmScheduler.scheduleFollowUp(
+                for: wakeGuard,
+                after: interval
+            )
             store.updateGuard {
                 $0.pendingFollowUpID = followUpID
-                $0.deferredUntil = Date().addingTimeInterval(AlarmScheduler.retryInterval)
+                $0.deferredUntil = Date().addingTimeInterval(interval)
             }
             enforcementWarning = nil
         } catch {

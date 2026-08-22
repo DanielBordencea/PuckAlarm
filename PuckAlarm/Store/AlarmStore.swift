@@ -21,7 +21,14 @@ final class AlarmStore {
         static let history = "puckalarm.history"
         static let simulation = "puckalarm.simulatePuck"
         static let schemaVersion = "puckalarm.schemaVersion"
+        static let retryInterval = "puckalarm.retryInterval"
     }
+
+    /// How long after a bypass the alarm comes back. Short enough to be relentless, long
+    /// enough that the system alert has dismissed before the next one arrives — below
+    /// about 30 seconds the alerts start stepping on each other.
+    static let retryChoices: [TimeInterval] = [30, 60, 120, 300, 600]
+    static let defaultRetryInterval: TimeInterval = 60
 
     /// Bump whenever the shape of a persisted model changes. Stored alongside the data so
     /// a mismatch can be reported instead of being discovered as an empty alarm list.
@@ -63,6 +70,11 @@ final class AlarmStore {
     /// Turning it on lets the whole alarm → bypass → re-arm → scan loop be exercised.
     var isSimulationEnabled: Bool {
         didSet { defaults.set(isSimulationEnabled, forKey: Key.simulation) }
+    }
+
+    /// Seconds between a bypass and the alarm returning. User-configurable in Settings.
+    var retryInterval: TimeInterval {
+        didSet { defaults.set(retryInterval, forKey: Key.retryInterval) }
     }
 
     /// Set when saved data could not be read back. Surfaced in Settings rather than left
@@ -115,6 +127,8 @@ final class AlarmStore {
         history = read([WakeRecord].self, Key.history) ?? []
         isSimulationEnabled =
             defaults.object(forKey: Key.simulation) as? Bool ?? !NFCTagReaderSession.readingAvailable
+        retryInterval =
+            defaults.object(forKey: Key.retryInterval) as? TimeInterval ?? Self.defaultRetryInterval
 
         let storedVersion = defaults.object(forKey: Key.schemaVersion) as? Int
         if let storedVersion, storedVersion > Self.currentSchemaVersion {

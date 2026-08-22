@@ -7,10 +7,6 @@ import SwiftUI
 /// title, buttons, tint — is defined in exactly one place.
 @MainActor
 enum AlarmScheduler {
-    /// How long after a bypass the alarm comes back. Short enough to be relentless, long
-    /// enough that the system alert has actually dismissed before the next one arrives.
-    static let retryInterval: TimeInterval = 60
-
     // MARK: - Authorization
 
     static var authorizationState: AlarmManager.AuthorizationState {
@@ -57,9 +53,12 @@ enum AlarmScheduler {
     ///
     /// - Returns: the id of the retry alarm, so it can be cancelled on a successful scan.
     @discardableResult
-    static func scheduleFollowUp(for wakeGuard: WakeGuard) async throws -> UUID {
+    static func scheduleFollowUp(
+        for wakeGuard: WakeGuard,
+        after interval: TimeInterval
+    ) async throws -> UUID {
         let followUpID = UUID()
-        let fireDate = Date().addingTimeInterval(retryInterval)
+        let fireDate = Date().addingTimeInterval(interval)
 
         let configuration = AlarmManager.AlarmConfiguration(
             schedule: .fixed(fireDate),

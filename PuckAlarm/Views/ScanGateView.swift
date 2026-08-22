@@ -63,7 +63,7 @@ struct ScanGateView: View {
             Button("Keep trying", role: .cancel) {}
         } message: {
             Text(
-                "This only buys you \(Int(AlarmScheduler.retryInterval)) seconds. "
+                "This only buys you \(SettingsView.intervalLabel(store.retryInterval)). "
                 + "The alarm rings again after that, and keeps ringing. "
                 + "Scanning the puck is the only thing that ends it."
             )

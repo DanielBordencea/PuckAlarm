@@ -30,12 +30,17 @@ struct SettingsView: View {
                 historySection
 
                 Section {
-                    LabeledContent("Re-arm delay", value: "\(Int(AlarmScheduler.retryInterval))s")
+                    Picker("Re-arm delay", selection: $store.retryInterval) {
+                        ForEach(AlarmStore.retryChoices, id: \.self) { interval in
+                            Text(Self.intervalLabel(interval)).tag(interval)
+                        }
+                    }
+                    .tint(Theme.accent)
                 } header: {
                     Text("Enforcement")
                 } footer: {
                     Text(
-                        "iOS always provides a Stop button on the system alarm and it cannot be removed. Pressing it without scanning re-arms the alarm after this delay, repeatedly, until the puck is scanned."
+                        "iOS always provides a Stop button on the system alarm and it cannot be removed. Pressing it — or \"I can't find my puck\" — re-arms the alarm after this delay, over and over, until the puck is scanned. Shorter is harsher. A new delay applies from the next bypass; a retry already armed keeps its original timing."
                     )
                 }
             }
@@ -50,6 +55,15 @@ struct SettingsView: View {
             }
         }
         .preferredColorScheme(.dark)
+    }
+
+    /// "30 seconds", "1 minute", "5 minutes" — reads better than a raw second count in a
+    /// picker the user is choosing a punishment with.
+    static func intervalLabel(_ interval: TimeInterval) -> String {
+        let seconds = Int(interval)
+        if seconds < 60 { return "\(seconds) seconds" }
+        let minutes = seconds / 60
+        return minutes == 1 ? "1 minute" : "\(minutes) minutes"
     }
 
     // MARK: - Puck
