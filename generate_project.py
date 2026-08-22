@@ -32,6 +32,15 @@ SWIFT_VERSION = "6.0"
 # "Simulate puck scans" switch instead of real tag reads.
 USE_NFC_ENTITLEMENT = False
 
+# Your 10-character Apple Developer Team ID, e.g. "A1B2C3D4E5". Leave empty to sign
+# manually in Xcode — but note that anything you change in Xcode's Signing & Capabilities
+# editor is discarded the next time this script runs, because it rewrites project.pbxproj
+# wholesale. Setting it here is the only change that survives.
+#
+# Find it at https://developer.apple.com/account under Membership Details, or with:
+#   security find-identity -v -p codesigning     # the value in parentheses
+DEVELOPMENT_TEAM = ""
+
 # Compiled into both targets.
 SHARED_SOURCES = [
     "PuckAlarm/Model/PuckAlarmMetadata.swift",
@@ -330,6 +339,8 @@ def main() -> None:
     }
     if USE_NFC_ENTITLEMENT:
         app_common["CODE_SIGN_ENTITLEMENTS"] = "PuckAlarm/PuckAlarm.entitlements"
+    if DEVELOPMENT_TEAM:
+        app_common["DEVELOPMENT_TEAM"] = DEVELOPMENT_TEAM
 
     ext_common = {
         "CODE_SIGN_STYLE": "Automatic",
@@ -345,6 +356,8 @@ def main() -> None:
         "SKIP_INSTALL": "YES",
         "SWIFT_EMIT_LOC_STRINGS": "YES",
     }
+    if DEVELOPMENT_TEAM:
+        ext_common["DEVELOPMENT_TEAM"] = DEVELOPMENT_TEAM
 
     def config(key: str, name: str, settings: dict[str, str]) -> str:
         rendered = "".join(f"\t\t\t\t{k} = {v};\n" for k, v in sorted(settings.items()))
