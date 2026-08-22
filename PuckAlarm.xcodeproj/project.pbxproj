@@ -1,0 +1,724 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+		609C05DB9CA35B40E5CF7FC6 /* PuckAlarm.app */ = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			path = PuckAlarm.app;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B49FC8BB640843A62381FD36 /* PuckAlarmWidgetExtension.appex */ = {
+			isa = PBXFileReference;
+			explicitFileType = "wrapper.app-extension";
+			includeInIndex = 0;
+			path = PuckAlarmWidgetExtension.appex;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		79F97548F64978EDE49799F3 /* AlarmScheduler.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = AlarmScheduler.swift;
+			sourceTree = "<group>";
+		};
+		C56AF3582B0B64D171C1292E /* AlarmScheduler.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 79F97548F64978EDE49799F3 /* AlarmScheduler.swift */;
+		};
+		E078F1BF404BEFF81FCA8011 /* WakeEnforcer.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = WakeEnforcer.swift;
+			sourceTree = "<group>";
+		};
+		07BE65AE406FF238DF62DBEC /* WakeEnforcer.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = E078F1BF404BEFF81FCA8011 /* WakeEnforcer.swift */;
+		};
+		B267F3CEC2C8B8E8B183FBA9 /* Theme.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = Theme.swift;
+			sourceTree = "<group>";
+		};
+		049DBD7D02EF2FE39CB20EE7 /* Theme.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = B267F3CEC2C8B8E8B183FBA9 /* Theme.swift */;
+		};
+		F3BE1922D5EA0F975625798F /* AlarmIntents.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = AlarmIntents.swift;
+			sourceTree = "<group>";
+		};
+		C9B90F443474A4228B1013B8 /* AlarmIntents.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = F3BE1922D5EA0F975625798F /* AlarmIntents.swift */;
+		};
+		DF8ACD88E2DB61034480837E /* AppRouter.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = AppRouter.swift;
+			sourceTree = "<group>";
+		};
+		61C454D7075E4E59609B1F72 /* AppRouter.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = DF8ACD88E2DB61034480837E /* AppRouter.swift */;
+		};
+		79024DD34E5E30203CFADDF9 /* AlarmItem.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = AlarmItem.swift;
+			sourceTree = "<group>";
+		};
+		0AAA039F1AA2F6270B818B80 /* AlarmItem.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 79024DD34E5E30203CFADDF9 /* AlarmItem.swift */;
+		};
+		4AD53C5B5033B1C8905208E1 /* PuckAlarmMetadata.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = PuckAlarmMetadata.swift;
+			sourceTree = "<group>";
+		};
+		87200812BF595F6C6712343C /* PuckAlarmMetadata.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 4AD53C5B5033B1C8905208E1 /* PuckAlarmMetadata.swift */;
+		};
+		23E5A81DB04161E3041E3855 /* PuckReader.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = PuckReader.swift;
+			sourceTree = "<group>";
+		};
+		E48D15B61D283D1E001E0E47 /* PuckReader.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 23E5A81DB04161E3041E3855 /* PuckReader.swift */;
+		};
+		14FEC1869510567AD0F58FF6 /* PuckAlarmApp.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = PuckAlarmApp.swift;
+			sourceTree = "<group>";
+		};
+		DD49BDC9533893BC6294C81D /* PuckAlarmApp.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 14FEC1869510567AD0F58FF6 /* PuckAlarmApp.swift */;
+		};
+		6BD50FA5557F45C8D32C4DF5 /* AlarmStore.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = AlarmStore.swift;
+			sourceTree = "<group>";
+		};
+		52CA921BF9A608CB94653796 /* AlarmStore.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 6BD50FA5557F45C8D32C4DF5 /* AlarmStore.swift */;
+		};
+		520F3A0D35591807A1C58B7C /* PuckKeychain.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = PuckKeychain.swift;
+			sourceTree = "<group>";
+		};
+		B56FF243D53D2B8B020D9504 /* PuckKeychain.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 520F3A0D35591807A1C58B7C /* PuckKeychain.swift */;
+		};
+		5A5739053A2CECC4F90F80BB /* AlarmEditorView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = AlarmEditorView.swift;
+			sourceTree = "<group>";
+		};
+		2930975CBA1A9E10BD76934C /* AlarmEditorView.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 5A5739053A2CECC4F90F80BB /* AlarmEditorView.swift */;
+		};
+		4164009B923B75EE35CE3E19 /* AlarmListView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = AlarmListView.swift;
+			sourceTree = "<group>";
+		};
+		D56CBF737FF0B620AAA9C8F5 /* AlarmListView.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 4164009B923B75EE35CE3E19 /* AlarmListView.swift */;
+		};
+		B109E6F2A7A197BBC8549E78 /* RootView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = RootView.swift;
+			sourceTree = "<group>";
+		};
+		4007008FDEED3CC8DED39FA8 /* RootView.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = B109E6F2A7A197BBC8549E78 /* RootView.swift */;
+		};
+		88BAF5CF1F53A4E3C4D71796 /* ScanGateView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = ScanGateView.swift;
+			sourceTree = "<group>";
+		};
+		B29B0ED252CB53B26D46EC6D /* ScanGateView.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 88BAF5CF1F53A4E3C4D71796 /* ScanGateView.swift */;
+		};
+		2C79A887C3B793C58C2C736A /* SettingsView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = SettingsView.swift;
+			sourceTree = "<group>";
+		};
+		7A5DD7B701D49DAC5197F9DF /* SettingsView.swift in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 2C79A887C3B793C58C2C736A /* SettingsView.swift */;
+		};
+		8BD5C8BA33C13B92D748E516 /* AlarmScheduler.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = 79F97548F64978EDE49799F3 /* AlarmScheduler.swift */;
+		};
+		42757BC90A260EE80434556D /* WakeEnforcer.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = E078F1BF404BEFF81FCA8011 /* WakeEnforcer.swift */;
+		};
+		80FE4EDBC1F459A30B8E43C3 /* Theme.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = B267F3CEC2C8B8E8B183FBA9 /* Theme.swift */;
+		};
+		426708A5A4781664239CBFCA /* AlarmIntents.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = F3BE1922D5EA0F975625798F /* AlarmIntents.swift */;
+		};
+		A0EECDBAF8924C0BBF625767 /* AppRouter.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = DF8ACD88E2DB61034480837E /* AppRouter.swift */;
+		};
+		A036853C5A0EC94F91EDD00E /* AlarmItem.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = 79024DD34E5E30203CFADDF9 /* AlarmItem.swift */;
+		};
+		70419DF22BB76937465B7515 /* PuckAlarmMetadata.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = 4AD53C5B5033B1C8905208E1 /* PuckAlarmMetadata.swift */;
+		};
+		3880CC1C320F0B5BC801B29D /* AlarmStore.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = 6BD50FA5557F45C8D32C4DF5 /* AlarmStore.swift */;
+		};
+		8251F29CE234BED670CA9033 /* PuckKeychain.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = 520F3A0D35591807A1C58B7C /* PuckKeychain.swift */;
+		};
+		FE1B05010BEF11425B6C56CE /* PuckAlarmLiveActivity.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = PuckAlarmLiveActivity.swift;
+			sourceTree = "<group>";
+		};
+		9900D11F409DB76A89C0F88D /* PuckAlarmLiveActivity.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = FE1B05010BEF11425B6C56CE /* PuckAlarmLiveActivity.swift */;
+		};
+		9E80E94CF5C922EBAB177AC8 /* PuckAlarmWidgetBundle.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = PuckAlarmWidgetBundle.swift;
+			sourceTree = "<group>";
+		};
+		DE2CCDD45A2C8A4C1BE3F05E /* PuckAlarmWidgetBundle.swift in PuckAlarmWidgetExtension */ = {
+			isa = PBXBuildFile;
+			fileRef = 9E80E94CF5C922EBAB177AC8 /* PuckAlarmWidgetBundle.swift */;
+		};
+		177655FF9ED7BFF73D1DE142 /* Assets.xcassets */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = folder.assetcatalog;
+			path = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		18A4900FD3DBC50A673393BD /* Assets.xcassets in PuckAlarm */ = {
+			isa = PBXBuildFile;
+			fileRef = 177655FF9ED7BFF73D1DE142 /* Assets.xcassets */;
+		};
+		969B2A7E94BA8917B6C2C0E8 /* Info.plist */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			path = Info.plist;
+			sourceTree = "<group>";
+		};
+		5EE62A27E1011269956C81B1 /* PuckAlarm.entitlements */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.entitlements;
+			path = PuckAlarm.entitlements;
+			sourceTree = "<group>";
+		};
+		29842F724ABE34E2646B270E /* Info.plist */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			path = Info.plist;
+			sourceTree = "<group>";
+		};
+		0B56B88DD404F6EB1B9C8897 /* PuckAlarmWidgetExtension.appex in Embed Foundation Extensions */ = {
+			isa = PBXBuildFile;
+			fileRef = B49FC8BB640843A62381FD36 /* PuckAlarmWidgetExtension.appex */;
+			settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); };
+		};
+		3722A5AECCA76F0546B28052 /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				79F97548F64978EDE49799F3 /* AlarmScheduler.swift */,
+				E078F1BF404BEFF81FCA8011 /* WakeEnforcer.swift */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
+		8F93D9B3C8ED7984ED06F9AD /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				B267F3CEC2C8B8E8B183FBA9 /* Theme.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
+		3222296150B89E9786BC63EC /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				F3BE1922D5EA0F975625798F /* AlarmIntents.swift */,
+				DF8ACD88E2DB61034480837E /* AppRouter.swift */,
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
+		C3C1015A45427E2A58D144C2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				79024DD34E5E30203CFADDF9 /* AlarmItem.swift */,
+				4AD53C5B5033B1C8905208E1 /* PuckAlarmMetadata.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BBDF742E27690DA61459A272 /* NFC */ = {
+			isa = PBXGroup;
+			children = (
+				23E5A81DB04161E3041E3855 /* PuckReader.swift */,
+			);
+			path = NFC;
+			sourceTree = "<group>";
+		};
+		51986574CEA1EFDEA6EDDC2C /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				6BD50FA5557F45C8D32C4DF5 /* AlarmStore.swift */,
+				520F3A0D35591807A1C58B7C /* PuckKeychain.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		6496074B50D8A9B1BAA20165 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5A5739053A2CECC4F90F80BB /* AlarmEditorView.swift */,
+				4164009B923B75EE35CE3E19 /* AlarmListView.swift */,
+				B109E6F2A7A197BBC8549E78 /* RootView.swift */,
+				88BAF5CF1F53A4E3C4D71796 /* ScanGateView.swift */,
+				2C79A887C3B793C58C2C736A /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AACFD6556781640F6BD521EB /* PuckAlarm */ = {
+			isa = PBXGroup;
+			children = (
+				3722A5AECCA76F0546B28052 /* Alarm */,
+				8F93D9B3C8ED7984ED06F9AD /* Design */,
+				3222296150B89E9786BC63EC /* Intents */,
+				C3C1015A45427E2A58D144C2 /* Model */,
+				BBDF742E27690DA61459A272 /* NFC */,
+				51986574CEA1EFDEA6EDDC2C /* Store */,
+				6496074B50D8A9B1BAA20165 /* Views */,
+				177655FF9ED7BFF73D1DE142 /* Assets.xcassets */,
+				969B2A7E94BA8917B6C2C0E8 /* Info.plist */,
+				5EE62A27E1011269956C81B1 /* PuckAlarm.entitlements */,
+				14FEC1869510567AD0F58FF6 /* PuckAlarmApp.swift */,
+			);
+			path = PuckAlarm;
+			sourceTree = "<group>";
+		};
+		C24157A817BA7360F016BA53 /* PuckAlarmWidget */ = {
+			isa = PBXGroup;
+			children = (
+				29842F724ABE34E2646B270E /* Info.plist */,
+				FE1B05010BEF11425B6C56CE /* PuckAlarmLiveActivity.swift */,
+				9E80E94CF5C922EBAB177AC8 /* PuckAlarmWidgetBundle.swift */,
+			);
+			path = PuckAlarmWidget;
+			sourceTree = "<group>";
+		};
+		43931CF8D8FF624E4C75AE32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				609C05DB9CA35B40E5CF7FC6 /* PuckAlarm.app */,
+				B49FC8BB640843A62381FD36 /* PuckAlarmWidgetExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9540DD348A7649CE5E3F907A /* generate_project.py */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text;
+			path = generate_project.py;
+			sourceTree = "<group>";
+		};
+		F686813170D914DFCBEC9594 /* README.md */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = net.daringfireball.markdown;
+			path = README.md;
+			sourceTree = "<group>";
+		};
+		0BE091DA3006EF7CF6F83C84 = {
+			isa = PBXGroup;
+			children = (
+				AACFD6556781640F6BD521EB /* PuckAlarm */,
+				C24157A817BA7360F016BA53 /* PuckAlarmWidget */,
+				F686813170D914DFCBEC9594 /* README.md */,
+				9540DD348A7649CE5E3F907A /* generate_project.py */,
+				43931CF8D8FF624E4C75AE32 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B78EEC64902732BAA2225CF1 /* PuckAlarm Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C56AF3582B0B64D171C1292E,
+				07BE65AE406FF238DF62DBEC,
+				049DBD7D02EF2FE39CB20EE7,
+				C9B90F443474A4228B1013B8,
+				61C454D7075E4E59609B1F72,
+				0AAA039F1AA2F6270B818B80,
+				87200812BF595F6C6712343C,
+				E48D15B61D283D1E001E0E47,
+				DD49BDC9533893BC6294C81D,
+				52CA921BF9A608CB94653796,
+				B56FF243D53D2B8B020D9504,
+				2930975CBA1A9E10BD76934C,
+				D56CBF737FF0B620AAA9C8F5,
+				4007008FDEED3CC8DED39FA8,
+				B29B0ED252CB53B26D46EC6D,
+				7A5DD7B701D49DAC5197F9DF,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29303E30F4108D7CFCA4A581 /* PuckAlarm Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		673F03A40C6AD0A8B26DA1C1 /* PuckAlarm Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A4900FD3DBC50A673393BD,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		841E940F91E005F0E01EA413 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				0B56B88DD404F6EB1B9C8897,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76B098FAA10D59707770CA0A /* PuckAlarmWidgetExtension Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BD5C8BA33C13B92D748E516,
+				42757BC90A260EE80434556D,
+				80FE4EDBC1F459A30B8E43C3,
+				426708A5A4781664239CBFCA,
+				A0EECDBAF8924C0BBF625767,
+				A036853C5A0EC94F91EDD00E,
+				70419DF22BB76937465B7515,
+				3880CC1C320F0B5BC801B29D,
+				8251F29CE234BED670CA9033,
+				9900D11F409DB76A89C0F88D,
+				DE2CCDD45A2C8A4C1BE3F05E,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C07AB3DDF608A7833D9CA16 /* PuckAlarmWidgetExtension Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		624E528539001A78CB3FF5F9 /* PuckAlarmWidgetExtension Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		70DCC1EB255A5F3C8D9ED349 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = -Onone;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		C3DCEEC1E0EB17A5583B8E94 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		26E84C2B3712F7DFAC8AD93F /* Build configuration list for project */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70DCC1EB255A5F3C8D9ED349 /* Debug */,
+				C3DCEEC1E0EB17A5583B8E94 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADD270A3ED2783634301C9DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PuckAlarm/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bordencea.PuckAlarm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		DA3D37440E3E7C466E7A969A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PuckAlarm/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bordencea.PuckAlarm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		1A822EBBC1FE6AC4199BD2AA /* Build configuration list for app */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADD270A3ED2783634301C9DD /* Debug */,
+				DA3D37440E3E7C466E7A969A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93267C9306D49EE46E41BCE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PuckAlarmWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PuckAlarmWidget;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bordencea.PuckAlarm.PuckAlarmWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		853D61C89E9813063B9B8524 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PuckAlarmWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PuckAlarmWidget;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bordencea.PuckAlarm.PuckAlarmWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		787DE1EEE6E618495E8CD631 /* Build configuration list for ext */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93267C9306D49EE46E41BCE6 /* Debug */,
+				853D61C89E9813063B9B8524 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		62F40286C55BF60C46F19162 = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4A92100D973C78AE960A35A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F20BBE1D8464EDEBB08F6248;
+			remoteInfo = PuckAlarmWidgetExtension;
+		};
+		E23F0176E0FB71C60402E576 = {
+			isa = PBXTargetDependency;
+			target = F20BBE1D8464EDEBB08F6248 /* PuckAlarmWidgetExtension */;
+			targetProxy = 62F40286C55BF60C46F19162 /* PBXContainerItemProxy */;
+		};
+		F20BBE1D8464EDEBB08F6248 /* PuckAlarmWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 787DE1EEE6E618495E8CD631;
+			buildPhases = (
+				76B098FAA10D59707770CA0A /* Sources */,
+				5C07AB3DDF608A7833D9CA16 /* Frameworks */,
+				624E528539001A78CB3FF5F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PuckAlarmWidgetExtension;
+			productName = PuckAlarmWidgetExtension;
+			productReference = B49FC8BB640843A62381FD36;
+			productType = "com.apple.product-type.app-extension";
+		};
+		3C4012DAFD3CD44A27CE9EE2 /* PuckAlarm */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1A822EBBC1FE6AC4199BD2AA;
+			buildPhases = (
+				B78EEC64902732BAA2225CF1 /* Sources */,
+				29303E30F4108D7CFCA4A581 /* Frameworks */,
+				673F03A40C6AD0A8B26DA1C1 /* Resources */,
+				841E940F91E005F0E01EA413 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E23F0176E0FB71C60402E576,
+			);
+			name = PuckAlarm;
+			productName = PuckAlarm;
+			productReference = 609C05DB9CA35B40E5CF7FC6;
+			productType = "com.apple.product-type.application";
+		};
+		D4A92100D973C78AE960A35A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					3C4012DAFD3CD44A27CE9EE2 = { CreatedOnToolsVersion = 26.5; };
+					F20BBE1D8464EDEBB08F6248 = { CreatedOnToolsVersion = 26.5; };
+				};
+			};
+			buildConfigurationList = 26E84C2B3712F7DFAC8AD93F;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0BE091DA3006EF7CF6F83C84;
+			minimizedProjectReferenceProxies = 1;
+			productRefGroup = 43931CF8D8FF624E4C75AE32 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3C4012DAFD3CD44A27CE9EE2 /* PuckAlarm */,
+				F20BBE1D8464EDEBB08F6248 /* PuckAlarmWidgetExtension */,
+			);
+		};
+	};
+	rootObject = D4A92100D973C78AE960A35A /* Project object */;
+}
