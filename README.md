@@ -4,7 +4,7 @@ An iOS alarm that will not let go until you physically walk to a dock and scan i
 
 The alarm rings through Silent and Focus like the system Clock app does, because it is a
 real alarm scheduled with **AlarmKit** (iOS 26). Stopping it opens a *wake guard*: unless
-the paired NFC puck is scanned, the alarm re-arms one minute later, and keeps re-arming.
+the paired NFC puck is scanned, the alarm re-arms a minute later, and keeps re-arming.
 The only clean exit is holding the phone against the tag.
 
 ---
@@ -17,7 +17,7 @@ Honest summary of what has actually been verified, as of 2026-08-23.
 |---|---|
 | ✅ Builds | Both targets, **Swift 6 language mode**, zero warnings |
 | ✅ Runs | iOS 26.5 Simulator — alarms fire, the re-arm loop works, history records wake-ups |
-| ✅ Verified | Alarm scheduling, bypass → 60s retry, scan resolution, one-shot retirement, corrupt-store recovery, and the gate presenting on a cold launch with a wake-up already in progress |
+| ✅ Verified | Alarm scheduling, bypass → timed retry, scan resolution, one-shot retirement, corrupt-store recovery, and the gate presenting on a cold launch with a wake-up already in progress |
 | ⚠️ Not verified | **Never run on physical hardware.** Needs an Apple ID in Xcode for a signing identity. |
 | ⚠️ Not verified | **Real NFC has never been exercised.** Requires a paid developer account (see below); all scans so far used the simulated path. |
 | ❌ Missing | **No tests.** The `WakeEnforcer` state machine is the thing that most needs them. |
@@ -50,7 +50,7 @@ exists that would. So "you must scan" is enforced *after* the button rather than
 1. The alarm fires. `WakeEnforcer.reconcile` sees it in `.alerting` and opens a `WakeGuard`.
 2. If Stop is pressed, `StopWithoutScanIntent` runs **inside the app's process** — that is
    what `LiveActivityIntent` guarantees — increments the bypass count and schedules a
-   one-shot retry 60 seconds out.
+   one-shot retry after the configured delay.
 3. The retry carries the *original* alarm's metadata, so the screen keeps reading 09:00
    rather than the retry time.
 4. `ScanGateView` covers the app for as long as the guard is open.
@@ -59,12 +59,13 @@ exists that would. So "you must scan" is enforced *after* the button rather than
 
 **There is no escape hatch.** *"I can't find my puck"* silences the current ring and hides
 the screen so the phone is usable, and that is all it does: it counts as a bypass, arms the
-same retry (30 seconds to 10 minutes, set in Settings ▸ Enforcement), and the alarm comes
-back. Pressing the system Stop button does
-exactly the same thing. Scanning the paired tag is the only action that closes a wake-up.
+same retry, and the alarm comes back. Pressing the system Stop button does exactly the
+same thing. The delay is yours to pick — 30 seconds to 10 minutes, under
+Settings ▸ Enforcement. Scanning the paired tag is the only action that closes a wake-up.
 
 Be deliberate about this before you rely on it. If the tag is genuinely lost or broken, the
-alarm will keep firing every minute indefinitely, and the only way out is deleting the app.
+alarm will keep firing on that interval indefinitely, and the only way out is deleting the
+app.
 That is the intended behaviour of a commitment device, not an oversight — but it is worth
 knowing before you put the tag somewhere you might not be able to reach.
 
