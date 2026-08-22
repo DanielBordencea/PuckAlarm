@@ -78,9 +78,20 @@ final class WakeEnforcer {
         // deferral so the scan screen comes back with the noise. This is the event that
         // makes "the alarm returns every minute" visible in the UI, rather than relying
         // on a timer.
-        if store.activeGuard != nil {
-            if !alerting.isEmpty, store.activeGuard?.deferredUntil != nil {
+        if let openGuard = store.activeGuard {
+            if !alerting.isEmpty, openGuard.deferredUntil != nil {
                 store.updateGuard { $0.deferredUntil = nil }
+            }
+
+            // Safety net. A wake-up is open, nothing is ringing, and no retry is armed —
+            // which means the alarm was stopped by some path that did not go through
+            // `bypass()`. `StopWithoutScanIntent` not firing would do it, and so would the
+            // app being killed mid-wake-up. Whatever the cause, the promise that the alarm
+            // comes back is currently broken, so repair it rather than trusting the
+            // intent to have run.
+            if alerting.isEmpty, openGuard.pendingFollowUpID == nil {
+                AppLog.enforcement.notice("guard open with no retry armed — repairing")
+                Task { await bypass() }
             }
             return
         }
@@ -129,10 +140,22 @@ final class WakeEnforcer {
     /// Invoked by `StopWithoutScanIntent` when the user presses the system Stop button.
     /// Opens the guard if this is the first bypass, then arms the retry.
     func handleStopPressed(originAlarmID: UUID) async {
-        guard Date() >= suppressStopHandlingUntil else { return }
+        guard Date() >= suppressStopHandlingUntil else {
+            AppLog.enforcement.notice("Stop ignored: inside the post-scan suppression window")
+            return
+        }
 
         if store.activeGuard == nil {
-            guard let item = store.alarm(id: originAlarmID), item.requiresPuckScan else { return }
+            guard let item = store.alarm(id: originAlarmID) else {
+                AppLog.enforcement.error(
+                    "Stop ignored: no alarm \(originAlarmID.uuidString, privacy: .public) in the store"
+                )
+                return
+            }
+            guard item.requiresPuckScan else {
+                AppLog.enforcement.notice("Stop allowed: alarm does not require a scan")
+                return
+            }
             store.beginGuard(
                 WakeGuard(
                     originAlarmID: item.id,

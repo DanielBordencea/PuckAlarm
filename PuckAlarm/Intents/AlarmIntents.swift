@@ -14,6 +14,10 @@ struct StopWithoutScanIntent: LiveActivityIntent {
     )
     static let isDiscoverable = false
 
+    /// Runs in the background: pressing Stop should re-arm the alarm, not drag the user
+    /// into the app.
+    static let supportedModes: IntentModes = .background
+
     @Parameter(title: "Alarm ID")
     var alarmID: String
 
@@ -24,7 +28,11 @@ struct StopWithoutScanIntent: LiveActivityIntent {
     }
 
     func perform() async throws -> some IntentResult {
-        guard let id = UUID(uuidString: alarmID) else { return .result() }
+        AppLog.routing.notice("StopWithoutScanIntent fired for \(alarmID, privacy: .public)")
+        guard let id = UUID(uuidString: alarmID) else {
+            AppLog.routing.error("StopWithoutScanIntent: unparseable id")
+            return .result()
+        }
         await WakeEnforcer.shared.handleStopPressed(originAlarmID: id)
         return .result()
     }
@@ -39,8 +47,14 @@ struct OpenScanIntent: LiveActivityIntent {
     static let isDiscoverable = false
 
     /// Launching the app is the whole point: Core NFC will not start a reader session from
-    /// a background extension.
+    /// a background extension, so this intent is useless unless it brings the app forward.
+    ///
+    /// `openAppWhenRun` is the iOS 16 spelling and is deprecated as of iOS 26 — the SDK
+    /// says "provide 'supportedModes' instead". Left in place for the older API surface,
+    /// but `supportedModes` is what iOS 26 actually honours; with only the deprecated flag
+    /// set, the intent ran in the background and the button appeared to do nothing at all.
     static let openAppWhenRun = true
+    static let supportedModes: IntentModes = .foreground(.immediate)
 
     @Parameter(title: "Alarm ID")
     var alarmID: String
@@ -52,7 +66,11 @@ struct OpenScanIntent: LiveActivityIntent {
     }
 
     func perform() async throws -> some IntentResult {
-        guard let id = UUID(uuidString: alarmID) else { return .result() }
+        AppLog.routing.notice("OpenScanIntent fired for \(alarmID, privacy: .public)")
+        guard let id = UUID(uuidString: alarmID) else {
+            AppLog.routing.error("OpenScanIntent: unparseable id")
+            return .result()
+        }
         await AppRouter.shared.requestScan(for: id)
         return .result()
     }
